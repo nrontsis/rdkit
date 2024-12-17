@@ -44,8 +44,8 @@ struct RDKIT_MOLSTANDARDIZE_EXPORT CleanupParameters {
   const char *rdbase_cstr = std::getenv("RDBASE");
 
  public:
-  std::string rdbase = rdbase_cstr != nullptr ? rdbase_cstr : "";
-  std::string normalizations;
+  // NOTE(kearnes): Hardcode RDBASE.
+  std::string rdbase = "third_party/rdkit";  std::string normalizations;
   std::string acidbaseFile;
   std::string fragmentFile;
   std::string tautomerTransforms;

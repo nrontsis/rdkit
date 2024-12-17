@@ -76,7 +76,7 @@ if __name__ == '__main__':
   query_size = {}
   query_mols = {}
 
-  #generate dummy mol object which generates empty fp
+  #generate placeholder mol object which generates empty fp
   emptyMol = Chem.MolFromSmiles('*')
 
   #read the STDIN

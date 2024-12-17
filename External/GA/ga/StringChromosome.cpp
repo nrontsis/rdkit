@@ -34,10 +34,11 @@ int StringChromosome<bool, BinaryStringChromosomePolicy>::decodeToInt(
 }
 
 /**
- * Performs full mixing.  Assumes that the strings primarily comprise dummy
- * values. The children then comprise all non dummy values from the parents.
- * Where both parents have non-dummy values set at the same position child1
- * takes the value from parent1 and child2 takes the value from parent2.
+ * Performs full mixing.  Assumes that the strings primarily comprise
+ * placeholder values. The children then comprise all non placeholder values
+ * from the parents. Where both parents have non-placeholder values set at the
+ * same position child1 takes the value from parent1 and child2 takes the value
+ * from parent2.
  * @param parent2
  * @param child1
  * @param child2
@@ -65,10 +66,10 @@ void StringChromosome<int, IntegerStringChromosomePolicy>::fullMixing(
 }
 
 /**
- * Assumes that the strings primarily comprise dummy values. Proceed as for
- * 1 point crossover on integer strings. However if the child is given a
- * dummy value when the other parent has a non-dummy value at a position,
- * then that value is copied to the child.
+ * Assumes that the strings primarily comprise placeholder values. Proceed as
+ * for 1 point crossover on integer strings. However if the child is given a
+ * placeholder value when the other parent has a non-placeholder value at a
+ * position, then that value is copied to the child.
  * @param parent2
  * @param child1
  * @param child2

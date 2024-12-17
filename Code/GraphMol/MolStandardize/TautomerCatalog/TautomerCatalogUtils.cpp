@@ -8,6 +8,7 @@
 //  of the RDKit source tree.
 //
 #include "TautomerCatalogUtils.h"
+#include "TautomerCatalogParams.h"
 #include <RDGeneral/BadFileException.h>
 #include <boost/tokenizer.hpp>
 #include <GraphMol/SmilesParse/SmilesParse.h>

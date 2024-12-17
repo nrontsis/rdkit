@@ -28,15 +28,15 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
-#include <RDBoost/python.h>
-#include <RDBoost/Wrap.h>
-
+#include <GraphMol/FilterCatalog/FilterCatalog.h>
 #include <GraphMol/FilterCatalog/FilterCatalogEntry.h>
 #include <GraphMol/FilterCatalog/FilterCatalog.h>
 #include <GraphMol/FilterCatalog/FilterMatcherBase.h>
 #include <GraphMol/FilterCatalog/FilterMatchers.h>
 #include <GraphMol/FilterCatalog/FunctionalGroupHierarchy.h>
 #include <GraphMol/RDKitBase.h>
+#include <RDBoost/Wrap.h>
+#include <RDBoost/python.h>
 
 namespace python = boost::python;
 
@@ -467,7 +467,8 @@ struct filtercat_wrapper {
              python::args("self", "key"));
 
     python::register_ptr_to_python<boost::shared_ptr<FilterCatalogEntry>>();
-    python::register_ptr_to_python<
+    python::implicitly_convertible<
+        boost::shared_ptr<FilterCatalogEntry>,
         boost::shared_ptr<const FilterCatalogEntry>>();
     python::def(
         "GetFunctionalGroupHierarchy", GetFunctionalGroupHierarchy,

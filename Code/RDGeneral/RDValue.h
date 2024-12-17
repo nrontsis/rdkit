@@ -276,7 +276,7 @@ typename boost::enable_if<boost::is_arithmetic<T>, T>::type from_rdvalue(
       try {
         res = boost::lexical_cast<T>(rdvalue_cast<std::string>(arg));
       } catch (...) {
-        throw exc;
+        abort();
       }
     }
   } else {

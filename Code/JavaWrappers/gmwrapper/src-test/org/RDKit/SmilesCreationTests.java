@@ -96,9 +96,9 @@ public class SmilesCreationTests extends GraphMolTest {
 		"\tC1=CC=CN(=O)=C1\r\n"
 	};
 		
-	static String[] dummyAtomSMILES =
+	static String[] sampleAtomSMILES =
 	{
-		// test dummy atoms:
+		// test sample atoms:
 		"c1ccccc1[*]",
 		"c1ccccc1[1*]",
 		"S1cccc1",
@@ -131,8 +131,8 @@ public class SmilesCreationTests extends GraphMolTest {
 	}
 
 	@Test
-	public void testWDummyAtomSMILES() {
-		for (String smi : dummyAtomSMILES) {
+	public void testWSampleAtomSMILES() {
+		for (String smi : sampleAtomSMILES) {
 			testGoodSMILES(smi);
 		}
 	}

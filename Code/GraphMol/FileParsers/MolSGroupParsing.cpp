@@ -1208,10 +1208,19 @@ std::string ParseV3000SGroupsBlock(std::istream *inStream, unsigned int line,
     unsigned int externalId;
     std::string type;
 
+    bool readSuccess = true;
+
     std::stringstream lineStream(tempStr);
-    lineStream >> sequenceId;
-    lineStream >> type;
-    lineStream >> externalId;
+    readSuccess = readSuccess && (lineStream >> sequenceId);
+    readSuccess = readSuccess && (lineStream >> type);
+    readSuccess = readSuccess && (lineStream >> externalId);
+
+    if (!readSuccess){
+      std::ostringstream errout;
+      errout << "Could not parse SGroup. Expected ";
+      errout << "'sequenceId type externalId'. Found: " << tempStr;
+      throw MolFileUnhandledFeatureException(errout.str());
+    }
 
     std::set<std::string> parsedLabels;
     if (strictParsing && !SubstanceGroupChecks::isValidType(type)) {

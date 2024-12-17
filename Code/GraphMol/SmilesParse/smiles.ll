@@ -4,6 +4,7 @@
 %option never-interactive
 %option nodefault
 %option nostdinit
+%option prefix="yysmiles_"
 
 %{
 

@@ -153,8 +153,8 @@ logger = logging.getLogger("freewilson")
 
 FreeWilsonPrediction = namedtuple("FreeWilsonPrediction", ['prediction', 'smiles', 'rgroups'])
 
-# match dummy atoms in a smiles string to extract atom maps
-dummypat = re.compile(r"\*:([0-9]+)")
+# match placeholder atoms in a smiles string to extract atom maps
+placeholderpat = re.compile(r"\*:([0-9]+)")
 
 
 # molzip doesn't handle some of the forms that the RGroupDecomposition
@@ -225,7 +225,7 @@ class RGroup:
     self.count = count  # num molecules with this rgruop
     self.coefficient = coefficient  # ridge coefficient
     self.idx = idx  # descriptor index
-    self.dummies = tuple([int(x) for x in sorted(dummypat.findall(smiles))])
+    self.placeholders = tuple([int(x) for x in sorted(placeholderpat.findall(smiles))])
 
     # Assemble some additive properties
 
@@ -538,9 +538,9 @@ def FWBuild(fw: FreeWilsonDecomposition, pred_filter=None, mw_filter=None, hvy_f
       no_cycles.append(g)
       continue
 
-      if len(g.dummies) > 1:
-        cycles.add(g.dummies)
-        rgroup_cycles[g.dummies].append(g)
+      if len(g.placeholders) > 1:
+        cycles.add(g.placeholders)
+        rgroup_cycles[g.placeholders].append(g)
       else:
         no_cycles.append(g)
 
@@ -622,10 +622,10 @@ def test_freewilson():
   # some simple tests
   from rdkit import Chem
   from rdkit.Chem import Descriptors
-  assert dummypat.findall("C[*:1]N.[H][*:2]") == ['1', '2']
-  assert dummypat.findall("C[*:1]N.[HH][*:2]") == ['1', '2']
-  assert dummypat.findall("C[*:1]N.[2H][*:2]") == ['1', '2']
-  assert dummypat.findall("C[*:1]N.[CH2][*:2]") == ['1', '2']
+  assert placeholderpat.findall("C[*:1]N.[H][*:2]") == ['1', '2']
+  assert placeholderpat.findall("C[*:1]N.[HH][*:2]") == ['1', '2']
+  assert placeholderpat.findall("C[*:1]N.[2H][*:2]") == ['1', '2']
+  assert placeholderpat.findall("C[*:1]N.[CH2][*:2]") == ['1', '2']
 
   scaffold = Chem.MolFromSmiles("[*:2]c1cccnc1[*:1]")
   mols = [Chem.MolFromSmiles("N" * (i + 1) + "c1cccnc1" + "C" * (i + 1)) for i in range(10)]
@@ -648,18 +648,18 @@ def test_rgroups():
   mol = Chem.MolFromSmiles(smiles)
   assert rg.mw == Descriptors.MolWt(mol)
   assert rg.hvyct == Descriptors.HeavyAtomCount(mol)
-  assert rg.dummies == (1, 2)
+  assert rg.placeholders == (1, 2)
 
   # try a non parseable smiles
   smiles = "[*:2]cccccc[*:1]"
   rg = RGroup(smiles=smiles, rgroup="Core", count=1, coefficient=0.1)
   assert rg.mw == 72.06599999999999  # almost but not quite benzene
   assert rg.hvyct == 6
-  assert rg.dummies == (1, 2)
+  assert rg.placeholders == (1, 2)
 
   # finally aa non parseble one
   smiles = "Nope"
   rg = RGroup(smiles=smiles, rgroup="Core", count=1, coefficient=0.1)
   assert rg.mw == 0
   assert rg.hvyct == 0
-  assert rg.dummies == tuple()
+  assert rg.placeholders == tuple()

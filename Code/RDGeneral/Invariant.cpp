@@ -14,7 +14,6 @@
 #include <string>
 #include <iostream>
 #include <boost/lexical_cast.hpp>
-#include "versions.h"
 
 #ifdef RDK_USE_BOOST_STACKTRACE
 #include <boost/stacktrace.hpp>
@@ -57,9 +56,7 @@ std::string Invariant::toUserString() const {
   std::string stringRep = this->prefix_d + "\n\t" + this->what() +
                           "\n\tViolation occurred on line " + line +
                           " in file " + filename +
-                          "\n\tFailed Expression: " + this->getExpression() +
-                          "\n\t" + "RDKIT: " + RDKit::rdkitVersion + "\n\t" +
-                          "BOOST: " + RDKit::boostVersion + "\n";
+                          "\n\tFailed Expression: " + this->getExpression();
 
 #ifdef SHOW_BACKTRACES_WITH_INVARIANT_ERRORS
   void *arr[10];

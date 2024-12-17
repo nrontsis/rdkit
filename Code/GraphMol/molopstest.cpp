@@ -3375,7 +3375,7 @@ void testSFNetIssue2196817() {
   {
     std::string pathName = getenv("RDBASE");
     pathName += "/Code/GraphMol/test_data/";
-    RWMol *m = MolFileToMol(pathName + "dummyArom.mol");
+    RWMol *m = MolFileToMol(pathName + "sampleArom.mol");
     TEST_ASSERT(m);
     TEST_ASSERT(m->getAtomWithIdx(0)->getAtomicNum() == 0);
     TEST_ASSERT(m->getAtomWithIdx(0)->getIsAromatic() == true);

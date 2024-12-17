@@ -18,6 +18,11 @@ namespace MolStandardize {
 #include "tautomerTransforms.in"
 #include "tautomerTransforms.v1.in"
 
+TautomerCatalogParams::TautomerCatalogParams() {
+  d_typeStr = "Tautomer Catalog Parameters";
+  d_transforms.clear();
+}
+
 TautomerCatalogParams::TautomerCatalogParams(const std::string &tautomerFile) {
   d_transforms.clear();
   if (tautomerFile.empty()) {

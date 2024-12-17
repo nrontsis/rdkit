@@ -23,7 +23,7 @@
 
 namespace RDKit {
 
-const char *rdkitQtVersion = RDK_QT_VERSION;
+const char *rdkitQtVersion = "6";
 
 // ****************************************************************************
 MolDraw2DQt::MolDraw2DQt(int width, int height, QPainter *qp, int panelWidth,

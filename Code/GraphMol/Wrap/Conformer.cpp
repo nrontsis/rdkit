@@ -22,12 +22,12 @@
 #define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
 #include <numpy/arrayobject.h>
 
-#include <RDGeneral/BoostStartInclude.h>
-#include <boost/python/numpy.hpp>
-#include <RDGeneral/BoostEndInclude.h>
+// #include <RDGeneral/BoostStartInclude.h>
+// #include <boost/python/numpy.hpp>
+// #include <RDGeneral/BoostEndInclude.h>
 
 namespace python = boost::python;
-namespace np = boost::python::numpy;
+// namespace np = boost::python::numpy;
 
 namespace RDKit {
 RDGeom::Point3D GetAtomPos(const Conformer *conf, unsigned int aid) {
@@ -58,7 +58,7 @@ PyObject *GetPos(const Conformer *conf) {
   return PyArray_Return(res);
 }
 
-void SetPos(Conformer *conf, np::ndarray const & array) {
+/** void SetPos(Conformer *conf, np::ndarray const & array) {
   if (array.get_dtype() != np::dtype::get_builtin<double>()) {
     PyErr_SetString(PyExc_TypeError, "Incorrect array data type");
     python::throw_error_already_set();
@@ -95,7 +95,8 @@ void SetPos(Conformer *conf, np::ndarray const & array) {
     }
   }
   
-}
+}*/
+
 void SetAtomPos(Conformer *conf, unsigned int aid, python::object loc) {
   // const std::vector<double> &loc) {
   int dim = python::extract<int>(loc.attr("__len__")());
@@ -136,9 +137,9 @@ struct conformer_wrapper {
              "Get the posistion of an atom\n")
         .def("GetPositions", GetPos, python::args("self"),
              "Get positions of all the atoms\n")
-        .def("SetPositions", SetPos,
-	     (python::args("self"), python::args("positions")),
-             "Set positions of all the atoms given a 2D or 3D numpy array of type double\n")
+        //.def("SetPositions", SetPos,
+	      //(python::args("self"), python::args("positions")),
+        //     "Set positions of all the atoms given a 2D or 3D numpy array of type double\n")
         .def("SetAtomPosition", SetAtomPos, python::args("self", "aid", "loc"),
              "Set the position of the specified atom\n")
         .def("SetAtomPosition",

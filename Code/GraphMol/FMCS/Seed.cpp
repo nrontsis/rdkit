@@ -19,6 +19,26 @@
 namespace RDKit {
 namespace FMCS {
 
+Seed::Seed() {}
+
+Seed& Seed::operator=(const Seed& src) {
+  NewBonds = src.NewBonds;
+  GrowingStage = src.GrowingStage;
+  MoleculeFragment = src.MoleculeFragment;
+  Topology = src.Topology;
+  ExcludedBonds = src.ExcludedBonds;
+  LastAddedAtomsBeginIdx = src.LastAddedAtomsBeginIdx;
+  LastAddedBondsBeginIdx = src.LastAddedBondsBeginIdx;
+  RemainingBonds = src.RemainingBonds;
+  RemainingAtoms = src.RemainingAtoms;
+#ifdef DUP_SUBSTRUCT_CACHE
+  DupCacheKey = src.DupCacheKey;
+#endif
+  MatchResult = src.MatchResult;
+  CopyComplete = true;  // LAST
+  return *this;
+}
+
 unsigned int Seed::addAtom(const Atom *atom) {
   unsigned int i = MoleculeFragment.Atoms.size();
   unsigned int aqi = atom->getIdx();

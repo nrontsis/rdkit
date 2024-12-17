@@ -61,7 +61,7 @@
 #include <GraphMol/Chirality.h>
 #include <GraphMol/Substruct/SubstructMatch.h>
 #include <GraphMol/SmilesParse/SmilesParse.h>
-#include <inchi_api.h>
+#include <third_party/inchi/INCHI_BASE/src/inchi_api.h>
 #include <cstring>
 #include <vector>
 #include <stack>
@@ -1864,6 +1864,10 @@ std::string MolToInchi(const ROMol& mol, ExtraInchiReturnValues& rv,
       for (const auto& p : neighbors) {
         stereo0D.neighbor[nid++] = p.second;
         // std::cerr<<" "<<p.second;
+        // stereo0D.neighbor has fixed length of 4
+        if (nid > 3) {
+          break;
+        }
       }
       if (nid == 3) {
         // std::cerr<<" nid==3, reorder";
@@ -1962,6 +1966,12 @@ std::string MolToInchi(const ROMol& mol, ExtraInchiReturnValues& rv,
 
     // neighbor
     unsigned int idx = inchiAtoms[atomIndex1].num_bonds;
+    // neighbor array has fixed length of MAXVAL (20)
+    if (idx >= MAXVAL) {
+      BOOST_LOG(rdErrorLog) << "illegally large idx (" << idx
+                            << ") in bond neighbors" << std::endl;
+      return std::string();
+    }
     inchiAtoms[atomIndex1].neighbor[idx] = atomIndex2;
 
     // bond type

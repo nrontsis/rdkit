@@ -9,17 +9,16 @@
 //
 #include <RDBoost/python.h>
 #define PY_ARRAY_UNIQUE_SYMBOL rdDistGeom_array_API
-#include <RDBoost/import_array.h>
-#include "numpy/arrayobject.h"
 #include <DistGeom/BoundsMatrix.h>
 #include <DistGeom/TriangleSmooth.h>
+#include <GraphMol/DistGeomHelpers/BoundsMatrixBuilder.h>
+#include <GraphMol/DistGeomHelpers/Embedder.h>
 #include <GraphMol/ForceFieldHelpers/CrystalFF/TorsionPreferences.h>
 
 #include <GraphMol/GraphMol.h>
 #include <RDBoost/Wrap.h>
-
-#include <GraphMol/DistGeomHelpers/BoundsMatrixBuilder.h>
-#include <GraphMol/DistGeomHelpers/Embedder.h>
+#include <RDBoost/import_array.h>
+#include "numpy/arrayobject.h"
 
 namespace python = boost::python;
 
@@ -294,11 +293,12 @@ BOOST_PYTHON_MODULE(rdDistGeom) {
        python::arg("useMacrocycleTorsions") = true,
        python::arg("useBasicKnowledge") = true, python::arg("ETversion") = 2,
        python::arg("printExpTorsionAngles") = false),
-      "returns information about the bonds corresponding to experimental torsions");
-  python::def(
-      "GetExperimentalTorsions", RDKit::getExpTorsHelperWithParams,
-      (python::arg("mol"), python::arg("embedParams")),
-      "returns information about the bonds corresponding to experimental torsions");
+      "returns information about the bonds corresponding to experimental "
+      "torsions");
+  python::def("GetExperimentalTorsions", RDKit::getExpTorsHelperWithParams,
+              (python::arg("mol"), python::arg("embedParams")),
+              "returns information about the bonds corresponding to "
+              "experimental torsions");
 
   std::string docString =
       "Use distance geometry to obtain initial \n\
@@ -344,23 +344,23 @@ BOOST_PYTHON_MODULE(rdDistGeom) {
  RETURNS:\n\n\
     ID of the new conformation added to the molecule \n\
 \n";
-  python::def(
-      "EmbedMolecule", RDKit::EmbedMolecule,
-      (python::arg("mol"), python::arg("maxAttempts") = 0,
-       python::arg("randomSeed") = -1, python::arg("clearConfs") = true,
-       python::arg("useRandomCoords") = false, python::arg("boxSizeMult") = 2.0,
-       python::arg("randNegEig") = true, python::arg("numZeroFail") = 1,
-       python::arg("coordMap") = python::dict(), python::arg("forceTol") = 1e-3,
-       python::arg("ignoreSmoothingFailures") = false,
-       python::arg("enforceChirality") = true,
-       python::arg("useExpTorsionAnglePrefs") = true,
-       python::arg("useBasicKnowledge") = true,
-       python::arg("printExpTorsionAngles") = false,
-       python::arg("useSmallRingTorsions") = false,
-       python::arg("useMacrocycleTorsions") = true,
-       python::arg("ETversion") = 2,
-       python::arg("useMacrocycle14config") = true),
-      docString.c_str());
+  // NOTE(kearnes): "no matching function for call to 'get_signature'".
+  // python::def(
+  //     "EmbedMolecule", RDKit::EmbedMolecule,
+  //     (python::arg("mol"), python::arg("maxAttempts") = 0,
+  //      python::arg("randomSeed") = -1, python::arg("clearConfs") = true,
+  //      python::arg("useRandomCoords") = false, python::arg("boxSizeMult")
+  //      = 2.0, python::arg("randNegEig") = true, python::arg("numZeroFail") =
+  //      1, python::arg("coordMap") = python::dict(), python::arg("forceTol") =
+  //      1e-3, python::arg("ignoreSmoothingFailures") = false,
+  //      python::arg("enforceChirality") = true,
+  //      python::arg("useExpTorsionAnglePrefs") = true,
+  //      python::arg("useBasicKnowledge") = true,
+  //      python::arg("printExpTorsionAngles") = false,
+  //      python::arg("useSmallRingTorsions") = false,
+  //      python::arg("useMacrocycleTorsions") = false,
+  //      python::arg("ETversion") = 1),
+  //     docString.c_str());
 
   docString =
       "Use distance geometry to obtain multiple sets of \n\
@@ -413,24 +413,24 @@ BOOST_PYTHON_MODULE(rdDistGeom) {
  RETURNS:\n\n\
     List of new conformation IDs \n\
 \n";
-  python::def(
-      "EmbedMultipleConfs", RDKit::EmbedMultipleConfs,
-      (python::arg("mol"), python::arg("numConfs") = 10,
-       python::arg("maxAttempts") = 0, python::arg("randomSeed") = -1,
-       python::arg("clearConfs") = true, python::arg("useRandomCoords") = false,
-       python::arg("boxSizeMult") = 2.0, python::arg("randNegEig") = true,
-       python::arg("numZeroFail") = 1, python::arg("pruneRmsThresh") = -1.0,
-       python::arg("coordMap") = python::dict(), python::arg("forceTol") = 1e-3,
-       python::arg("ignoreSmoothingFailures") = false,
-       python::arg("enforceChirality") = true, python::arg("numThreads") = 1,
-       python::arg("useExpTorsionAnglePrefs") = true,
-       python::arg("useBasicKnowledge") = true,
-       python::arg("printExpTorsionAngles") = false,
-       python::arg("useSmallRingTorsions") = false,
-       python::arg("useMacrocycleTorsions") = true,
-       python::arg("ETversion") = 2,
-       python::arg("useMacrocycle14config") = true),
-      docString.c_str());
+  // NOTE(kearnes): "no matching function for call to 'get_signature'".
+  // python::def(
+  //     "EmbedMultipleConfs", RDKit::EmbedMultipleConfs,
+  //     (python::arg("mol"), python::arg("numConfs") = 10,
+  //      python::arg("maxAttempts") = 0, python::arg("randomSeed") = -1,
+  //      python::arg("clearConfs") = true, python::arg("useRandomCoords") = false,
+  //      python::arg("boxSizeMult") = 2.0, python::arg("randNegEig") = true,
+  //      python::arg("numZeroFail") = 1, python::arg("pruneRmsThresh") = -1.0,
+  //      python::arg("coordMap") = python::dict(), python::arg("forceTol") = 1e-3,
+  //      python::arg("ignoreSmoothingFailures") = false,
+  //      python::arg("enforceChirality") = true, python::arg("numThreads") = 1,
+  //      python::arg("useExpTorsionAnglePrefs") = true,
+  //      python::arg("useBasicKnowledge") = true,
+  //      python::arg("printExpTorsionAngles") = false,
+  //      python::arg("useSmallRingTorsions") = false,
+  //      python::arg("useMacrocycleTorsions") = false,
+  //      python::arg("ETversion") = 1),
+  //     docString.c_str());
 
   python::enum_<RDKit::DGeomHelpers::EmbedFailureCauses>("EmbedFailureCauses")
       .value("INITIAL_COORDS",
@@ -466,6 +466,9 @@ BOOST_PYTHON_MODULE(rdDistGeom) {
       .def_readwrite(
           "numThreads", &PyEmbedParameters::numThreads,
           "number of threads to use when embedding multiple conformations")
+      .def_readwrite("timeout", &RDKit::DGeomHelpers::EmbedParameters::timeout,
+                     "maximum time in seconds to generate a conformer for a "
+                     "single molecule fragment. If set to 0, no timeout is set")
       .def_readwrite("randomSeed",
                      &PyEmbedParameters::randomSeed,
                      "seed for the random number generator")

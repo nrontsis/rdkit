@@ -12,7 +12,6 @@
 #define RD_TAUTOMER_CATALOG_UTILS_H
 
 #include <GraphMol/RDKitBase.h>
-#include "TautomerCatalogParams.h"
 #include <GraphMol/Substruct/SubstructMatch.h>
 #include <GraphMol/ChemReactions/Reaction.h>
 #include <GraphMol/Bond.h>

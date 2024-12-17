@@ -17,11 +17,11 @@
 #include "Graph.h"
 #include "DuplicatedSeedCache.h"
 #include "SubstructMatchCustom.h"
+#include "TargetMatch.h"
 
 namespace RDKit {
 namespace FMCS {
 class MaximumCommonSubgraph;
-struct TargetMatch;
 
 // Reference to a fragment of source molecule
 struct RDKIT_FMCS_EXPORT MolFragment {
@@ -94,31 +94,12 @@ class RDKIT_FMCS_EXPORT Seed {
   std::vector<TargetMatch> MatchResult;
 
  public:
-  Seed()
-
-  {}
+  Seed();
 
   void setMoleculeFragment(const Seed& src) {
     MoleculeFragment = src.MoleculeFragment;
   }
-  Seed& operator=(const Seed& src) {
-    NewBonds = src.NewBonds;
-    GrowingStage = src.GrowingStage;
-    MoleculeFragment = src.MoleculeFragment;
-    Topology = src.Topology;
-    ExcludedBonds = src.ExcludedBonds;
-    LastAddedAtomsBeginIdx = src.LastAddedAtomsBeginIdx;
-    LastAddedBondsBeginIdx = src.LastAddedBondsBeginIdx;
-    RemainingBonds = src.RemainingBonds;
-    RemainingAtoms = src.RemainingAtoms;
-    StoreAllDegenerateMCS = src.StoreAllDegenerateMCS;
-#ifdef DUP_SUBSTRUCT_CACHE
-    DupCacheKey = src.DupCacheKey;
-#endif
-    MatchResult = src.MatchResult;
-    CopyComplete = true;  // LAST
-    return *this;
-  }
+  Seed& operator=(const Seed& src);
   void createFromParent(const Seed* parent) {
     MoleculeFragment = parent->MoleculeFragment;
     Topology = parent->Topology;

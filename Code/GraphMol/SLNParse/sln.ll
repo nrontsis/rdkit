@@ -1,6 +1,7 @@
 %option reentrant
 %option bison-bridge
 %option noyywrap
+%option prefix="yysln_"
 
 %{
 
