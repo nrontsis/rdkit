@@ -61,7 +61,7 @@
 #include <GraphMol/Chirality.h>
 #include <GraphMol/Substruct/SubstructMatch.h>
 #include <GraphMol/SmilesParse/SmilesParse.h>
-#include <third_party/inchi/INCHI_BASE/src/inchi_api.h>
+#include <inchi_api.h>
 #include <cstring>
 #include <vector>
 #include <stack>

@@ -39,12 +39,12 @@
 #include "SmilesParseOps.h"
 #include <RDGeneral/RDLog.h>
 #include <RDGeneral/Invariant.h>
-#include "third_party/rdkit/Code/GraphMol/SmilesParse/smiles.tab.hpp"
+#include "smiles.tab.hpp"
 // NOTE: this is a bit fragile since a lot of the #defines in smiles.tab.hpp
 // could prevent the same #defines in smarts.tab.hpp from being read.
 // Fortunately if there are actually any problems here, they will inevitably
 // show up very quickly in the tests.
-#include "third_party/rdkit/Code/GraphMol/SmilesParse/smarts.tab.hpp"
+#include "smarts.tab.hpp"
 #include <list>
 
 int yysmiles_lex_init(void **);
