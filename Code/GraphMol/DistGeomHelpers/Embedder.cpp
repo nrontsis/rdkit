@@ -576,7 +576,7 @@ bool checkChiralCenters(const RDGeom::PointPtrVect *positions,
 }
 bool minimizeFourthDimension(RDGeom::PointPtrVect *positions,
                              const detail::EmbedArgs &eargs,
-                             const EmbedParameters &embedParams,
+                             EmbedParameters &embedParams,
                              TimePoint* end_time) {
   // now redo the minimization if we have a chiral center
   // or have started from random coords. This
