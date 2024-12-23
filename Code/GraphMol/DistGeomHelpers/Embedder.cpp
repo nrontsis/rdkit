@@ -1326,7 +1326,7 @@ void embedHelper_(int threadId, int numThreads, EmbedArgs *eargs,
   }
   for (size_t ci = 0; ci < eargs->confs->size(); ci++) {
     if (end_time != nullptr && Clock::now() > *end_time) {
-      params.failures[EmbedFailureCauses::EXCEEDED_TIMEOUT]++;
+      params->failures[EmbedFailureCauses::EXCEEDED_TIMEOUT]++;
       return;
     }
 
@@ -1609,7 +1609,7 @@ void EmbedMultipleConfs(ROMol &mol, INT_VECT &res, unsigned int numConfs,
       }
     }
 #endif
-    if (params[EXCEEDED_TIMEOUT] > 0) {
+    if (params.failures[EmbedFailureCauses::EXCEEDED_TIMEOUT] > 0) {
       res.push_back(-1);
       return;
     }
