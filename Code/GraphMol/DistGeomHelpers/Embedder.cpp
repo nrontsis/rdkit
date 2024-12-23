@@ -1326,7 +1326,7 @@ void embedHelper_(int threadId, int numThreads, EmbedArgs *eargs,
   }
   for (size_t ci = 0; ci < eargs->confs->size(); ci++) {
     if (end_time != nullptr && Clock::now() > *end_time) {
-      embedParams.failures[EmbedFailureCauses::EXCEEDED_TIMEOUT]++;
+      params.failures[EmbedFailureCauses::EXCEEDED_TIMEOUT]++;
       return;
     }
 
